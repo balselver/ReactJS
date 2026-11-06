@@ -3,6 +3,6 @@ import { createRoot } from 'react-dom/client'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <h1>Product List</h1>
+    <h1>Product List </h1>
   </StrictMode>,
 )
