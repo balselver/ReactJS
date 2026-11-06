@@ -7,8 +7,11 @@ function App() {
   return (
     <div>
       <Header />
-      <ProductList />
-      <Footer />
+
+      <div className='container mt-3'>
+        <ProductList />
+      </div>
+
     </div>
   );
 }
@@ -19,7 +22,6 @@ function Header() {
       <nav className='navbar navbar-expand bg-dark border-bottom border-body' data-bs-theme="dark">
         <div className='container'>
           <a href='' className='navbar-brand'>Store App</a>
-
         </div>
       </nav>
     </header>
@@ -62,17 +64,37 @@ function ProductList() {
       "is_active": true
 
     },
+
+    {
+      "imageUrl": "/img4.jpg",
+      "title": "Iphone 16",
+      "descreption": "Lorem ipsum dolor sit amet.",
+      "price": 50000,
+      "is_active": true
+
+    },
+
+    {
+      "imageUrl": "/img4.jpg",
+      "title": "Iphone 16",
+      "descreption": "Lorem ipsum dolor sit amet.",
+      "price": 50000,
+      "is_active": true
+
+    },
   ];
 
   return (
     <>
-      <h2 className='title'>Product List </h2>
+
       {
         items.length > 0 ? (
-          <div id='product-list'>
+          <div className='row row-cols-2 row-cols-md-3 row-cols-xl-4 g-4' id='product-list'>
             {
               items.map((item, index) => (
-                <Product key={index} productObj={item} />
+                <div className='col'>
+                  <Product key={index} productObj={item} />
+                </div>
               ))
             }
           </div>
@@ -91,35 +113,20 @@ function Product({ productObj }) {
   if (!productObj.is_active)
     return null;
   return (
-    <div>
-      <img src={productObj.imageUrl} alt='' />
-      <h2> {productObj.title} </h2>
-      <p> {productObj.descreption} </p>
-      <span className={`f20 ${productObj.price < 40000 ? " discount" : " price"}`}>
-        {productObj.price} TL
-      </span>
+    <div className='card shadow-sm'>
+      <img className='card-img-tops p-15 p-md-18 border-bottom' src={productObj.imageUrl} alt='' />
+      <div className='card-body'>
+        <h2 className='card-title'> {productObj.title} </h2>
+        <p className='card-text'> {productObj.descreption} </p>
+        <span className='badge text-bg-success'>{productObj.price} TL
+        </span>
+      </div>
+
     </div>
   );
 }
 
-function Footer() {
-  const hour = new Date().getHours();
-  const openHour = 10;
-  const closeHour = 20;
-  const isOpen = hour >= openHour && hour <= closeHour;
 
-  return (
-    <footer>
-      {
-        isOpen ? (
-          <p>Akşam {closeHour}'e kadar sipariş verebilirsiniz. </p>
-        ) : (
-          <p>İşletmemiz şuan kapalıdır. Açılış saatimiz : {openHour}</p>
-        )
-      }
-    </footer>
-  )
-}
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
